@@ -45,6 +45,9 @@
       "backup_volumes": [
         "nextcloud_aio_nextcloud",
         "nextcloud_aio_apache"
+      ],
+      "networks": [
+        "nextcloud-aio"
       ]
     },
     {
@@ -83,6 +86,9 @@
       "backup_volumes": [
         "nextcloud_aio_database",
         "nextcloud_aio_database_dump"
+      ],
+      "networks": [
+        "nextcloud-aio"
       ]
     },
     {
@@ -178,6 +184,9 @@
       ],
       "backup_volumes": [
         "nextcloud_aio_nextcloud"
+      ],
+      "networks": [
+        "nextcloud-aio"
       ]
     },
     {
@@ -203,7 +212,10 @@
         "REDIS_PASSWORD",
         "ONLYOFFICE_SECRET"
       ],
-      "restart": "unless-stopped"
+      "restart": "unless-stopped",
+      "networks": [
+        "nextcloud-aio"
+      ]
     },
     {
       "container_name": "nextcloud-aio-collabora",
@@ -232,6 +244,12 @@
       "nextcloud_exec_commands": [
         "echo 'Activating collabora config...'",
         "php /var/www/html/occ richdocuments:activate-config"
+      ],
+      "profiles": [
+        "collabora"
+      ],
+      "networks": [
+        "nextcloud-aio"
       ]
     },
     {
@@ -265,7 +283,13 @@
         "TURN_SECRET",
         "SIGNALING_SECRET"
       ],
-      "restart": "unless-stopped"
+      "restart": "unless-stopped",
+      "profiles": [
+        "talk"
+      ],
+      "networks": [
+        "nextcloud-aio"
+      ]
     },
     {
       "container_name": "nextcloud-aio-borgbackup",
@@ -375,7 +399,13 @@
           "writeable": true
         }
       ],
-      "restart": "unless-stopped"
+      "restart": "unless-stopped",
+      "profiles": [
+        "clamav"
+      ],
+      "networks": [
+        "nextcloud-aio"
+      ]
     },
     {
       "container_name": "nextcloud-aio-onlyoffice",
@@ -401,7 +431,13 @@
       "secrets": [
         "ONLYOFFICE_SECRET"
       ],
-      "restart": "unless-stopped"
+      "restart": "unless-stopped",
+      "profiles": [
+        "onlyoffice"
+      ],
+      "networks": [
+        "nextcloud-aio"
+      ]
     },
     {
       "container_name": "nextcloud-aio-imaginary",
@@ -417,6 +453,12 @@
       "restart": "unless-stopped",
       "cap_add": [
         "SYS_NICE"
+      ],
+      "profiles": [
+        "imaginary"
+      ],
+      "networks": [
+        "nextcloud-aio"
       ]
     },
     {
@@ -440,7 +482,13 @@
           "writeable": true
         }
       ],
-      "restart": "unless-stopped"
+      "restart": "unless-stopped",
+      "profiles": [
+        "fulltextsearch"
+      ],
+      "networks": [
+        "nextcloud-aio"
+      ]
     }
   ]
 }
